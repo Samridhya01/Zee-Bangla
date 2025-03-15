@@ -16,7 +16,7 @@
             overflow: hidden;
         }
 
-        /* Background GIF (Desktop) */
+        /* Background GIF (Common for All Devices) */
         .bg-animation {
             content: "";
             position: fixed;
@@ -24,17 +24,24 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif') no-repeat center center fixed;
             background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             z-index: -2;
             animation: bgBlink 3s infinite;
+        }
+
+        /* Desktop Background */
+        @media (min-width: 769px) {
+            .bg-animation {
+                background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif');
+            }
         }
 
         /* Mobile Background */
         @media (max-width: 768px) {
             .bg-animation {
-                background: url('https://i.sstatic.net/YOJ9H.gif') no-repeat center center fixed;
-                background-size: cover;
+                background-image: url('https://i.sstatic.net/YOJ9H.gif');
             }
         }
 
@@ -44,32 +51,16 @@
             66% { opacity: 0; }       /* Hidden for 2s */
         }
 
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            #terminal {
-                width: 95%;
-                font-size: 12px;
-                height: 200px;
-            }
-
-            .logo-container img {
-                width: 200px;
-            }
-
-            .slider-text {
-                font-size: 14px;
-            }
-        }
-
         /* Logo Styling */
         .logo-container {
             text-align: center;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .logo-container img {
-            width: 250px;
+            width: 180px; /* Reduced size */
             height: auto;
+            filter: brightness(0) invert(1); /* Chroma Key Black Effect */
         }
 
         /* Terminal Styling */
@@ -125,7 +116,7 @@
 
     <!-- Hidden Slider (Auto-Scrolling "Hack By samriddho") -->
     <div class="slider">
-        <span class="slider-text">HAck By Samrat XD.    Development by Samrar OP  </span>
+        <span class="slider-text">HAck By Samriddho</span>
     </div>
 
     <script>

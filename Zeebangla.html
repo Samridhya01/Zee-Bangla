@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Mode - Sana Play</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            text-align: left;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        #terminal {
+            background: black;
+            border: 2px solid #00ff00;
+            padding: 15px;
+            width: 90%;
+            max-width: 600px;
+            height: 250px;
+            overflow-y: auto;
+            white-space: pre-line;
+            font-size: 14px;
+            box-shadow: 0 0 20px #00ff00;
+            margin: auto;
+        }
+
+        /* Auto-Scroll Animation */
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .slider {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .slider-text {
+            display: inline-block;
+            font-size: 18px;
+            color: #ff00ff;
+            animation: scrollText 10s linear infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="terminal">Initializing Hack...\n</div>
+
+    <!-- Hidden Slider (Auto-Scrolling "I love you Sana ❤️") -->
+    <div class="slider">
+        <span class="slider-text">💖 I LOVE YOU SANA 🫣💖 I LOVE YOU SANA 🫣💖 I LOVE YOU SANA 🫣💖</span>
+    </div>
+
+    <script>
+        const commands = [
+            "Connecting to Samriddha's Server... 🔗",
+            "Task Successful ✅",
+            "Waiting for Approval... ⏳",
+            "Task Successful ✅",
+            "Connecting to Zee5... 📡",
+            "Task Successful ✅",
+            "Removing Porn Files... 💦",
+            "Task Successful ✅",
+            "Bypassing Firewall... 🔓",
+            "Task Successful ✅",
+            "Extracting encrypted keys... 🔑",
+            "Task Successful ✅",
+            "Injecting payload... 💻",
+            "Task Successful ✅",
+            "Finalizing exploit... 🚀",
+            "Task Successful ✅",
+            "I love you Sana 🫣"
+        ];
+
+        let index = 0;
+        function typeCommand() {
+            if (index < commands.length) {
+                document.getElementById("terminal").innerText += "\n" + commands[index];
+                document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight; // Auto-scroll
+                index++;
+                setTimeout(typeCommand, 1500);
+            } else {
+                setTimeout(openPopup, 2000);
+            }
+        }
+
+        function openPopup() {
+            let x = Math.floor(Math.random() * (window.innerWidth - 300));
+            let y = Math.floor(Math.random() * (window.innerHeight - 500));
+            let popup = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "VideoPlayer", `width=300,height=500,top=${y},left=${x}`);
+            
+            setInterval(() => {
+                let newX = Math.floor(Math.random() * (window.innerWidth - 300));
+                let newY = Math.floor(Math.random() * (window.innerHeight - 500));
+                popup.moveTo(newX, newY);
+            }, 2000);
+        }
+
+        setTimeout(typeCommand, 1000);
+    </script>
+
+</body>
+</html>

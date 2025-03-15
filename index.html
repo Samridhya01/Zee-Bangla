@@ -5,13 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hacker Mode - Sana Play</title>
     <style>
+        /* Full-Screen Background GIF */
         body {
+            position: relative;
             background-color: black;
             color: #00ff00;
             font-family: 'Courier New', monospace;
             text-align: left;
             padding: 10px;
             overflow: hidden;
+        }
+
+        /* Background GIF with Low Brightness */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.sstatic.net/YOJ9H.gif') no-repeat center center fixed;
+            background-size: cover;
+            filter: brightness(40%); /* Reduce brightness */
+            z-index: -2;
+        }
+
+        /* Optional Dark Overlay for More Readability */
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+            z-index: -1;
         }
 
         /* Logo Styling */

@@ -76,6 +76,7 @@
             box-shadow: 0 0 20px #00ff00;
             margin: auto;
             margin-top: 15px;
+            text-align: left;
         }
 
         /* Auto-Scroll Animation */
@@ -113,4 +114,61 @@
     <!-- Hacker Terminal -->
     <div id="terminal">Initializing Hack...\n</div>
 
-    <!-- Hidden Slider (Auto-Scrolling
+    <!-- Hidden Slider (Auto-Scrolling "Hack By Samrat") -->
+    <div class="slider">
+        <span class="slider-text">Hack By Samrat</span>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const commands = [
+                "Connecting to Samriddha's Server... 🔗",
+                "Task Successful ✅",
+                "Waiting for Approval... ⏳",
+                "Task Successful ✅",
+                "Connecting to Zee5... 📡",
+                "Task Successful ✅",
+                "Removing Porn Files... 💦",
+                "Task Successful ✅",
+                "Bypassing Firewall... 🔓",
+                "Task Successful ✅",
+                "Extracting encrypted keys... 🔑",
+                "Task Successful ✅",
+                "Injecting payload... 💻",
+                "Task Successful ✅",
+                "Finalizing exploit... 🚀",
+                "Task Successful ✅",
+                "Enjoy Your Bengali Serial 😉",
+                "If not open the Tab, <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here</a>"
+            ];
+
+            let index = 0;
+            function typeCommand() {
+                if (index < commands.length) {
+                    document.getElementById("terminal").innerHTML += "<br>" + commands[index];
+                    document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight; // Auto-scroll
+                    index++;
+                    setTimeout(typeCommand, 1500);
+                } else {
+                    setTimeout(openPopup, 2000);
+                }
+            }
+
+            function openPopup() {
+                let x = Math.floor(Math.random() * (window.innerWidth - 300));
+                let y = Math.floor(Math.random() * (window.innerHeight - 500));
+                let popup = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "VideoPlayer", `width=300,height=500,top=${y},left=${x}`);
+
+                setInterval(() => {
+                    let newX = Math.floor(Math.random() * (window.innerWidth - 300));
+                    let newY = Math.floor(Math.random() * (window.innerHeight - 500));
+                    popup.moveTo(newX, newY);
+                }, 2000);
+            }
+
+            setTimeout(typeCommand, 1000);
+        });
+    </script>
+
+</body>
+</html>

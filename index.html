@@ -16,8 +16,9 @@
             overflow: hidden;
         }
 
-        /* Background Animation */
+        /* Background GIF (Common for All Devices) */
         .bg-animation {
+            content: "";
             position: fixed;
             top: 0;
             left: 0;
@@ -30,16 +31,36 @@
             animation: bgBlink 3s infinite;
         }
 
-        /* Desktop & Mobile Background */
+        /* Desktop Background */
         @media (min-width: 769px) {
-            .bg-animation { background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif'); }
-        }
-        @media (max-width: 768px) {
-            .bg-animation { background-image: url('https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/YOJ9H.gif'); }
+            .bg-animation {
+                background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif');
+            }
         }
 
-        /* Blinking Animation */
-        @keyframes bgBlink { 0%, 100% { opacity: 1; } 66% { opacity: 0; } }
+        /* Mobile Background */
+        @media (max-width: 768px) {
+            .bg-animation {
+                background-image: url('https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/YOJ9H.gif');
+            }
+        }
+
+        /* Background Blinking Animation */
+        @keyframes bgBlink {
+            0%, 100% { opacity: 1; }  
+            66% { opacity: 0; }      
+        }
+
+        /* Logo Styling */
+        .logo-container {
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .logo-container img {
+            width: 269px;
+            height: auto;
+        }
 
         /* Terminal Styling */
         #terminal {
@@ -58,116 +79,97 @@
             text-align: left;
         }
 
-        /* Scam Message Effect */
-        .scam-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 20px;
-            color: red;
-            font-weight: bold;
-            opacity: 0;
-            animation: scamEffect 0.1s linear infinite;
+        /* Auto-Scroll Animation */
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
-        @keyframes scamEffect {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        /* Black Screen Fear Effect */
-        .blackout {
+        .slider {
             position: fixed;
-            top: 0;
-            left: 0;
+            bottom: 20px;
             width: 100%;
-            height: 100%;
-            background-color: black;
-            z-index: 9999;
-            display: none;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .slider-text {
+            display: inline-block;
+            font-size: 18px;
+            color: #ff00ff;
+            animation: scrollText 10s linear infinite;
         }
     </style>
 </head>
 <body>
 
+    <!-- Background Animation Layer -->
     <div class="bg-animation"></div>
+
+    <!-- Logo at the top center -->
+    <div class="logo-container">
+        <img src="https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/Logo.png" alt="Sana Play Logo">
+    </div>
+
+    <!-- Hacker Terminal -->
     <div id="terminal">Initializing ZEE5...\n</div>
-    <div class="blackout" id="blackScreen"></div>
+
+    <!-- Hidden Slider (Auto-Scrolling "Developed By Samrat OP") -->
+    <div class="slider">
+        <span class="slider-text">Developed By Samrat OP</span>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            let isDramatic = Math.random() < 0.5;  // 10% chance for dramatic mode
+            const commands = [
+                "Connecting to Samriddha's Server... 🔗",
+                "Task Successful ✅",
+                "Waiting for Approval... ⏳",
+                "Task Successful ✅",
+                "Connecting to Zee5... 📡",
+                "Task Successful ✅",
+                "Removing Porn Links... 💦",
+                "Task Successful ✅",
+                "Bypassing Firewall... 🔓",
+                "Task Successful ✅",
+                "Extracting encrypted keys... 🔑",
+                "Task Successful ✅",
+                "Injecting payload... 💻",
+                "Task Successful ✅",
+                "Finalizing exploit... 🚀",
+                "Final Task Successful ✅",
+            ];
 
-            function normalExperience() {
-                const commands = [
-                    "Connecting to Zee5... 📡", "Task Successful ✅",
-                    "Bypassing Firewall... 🔓", "Task Successful ✅",
-                    "Extracting encrypted keys... 🔑", "Task Successful ✅",
-                    "Injecting payload... 💻", "Task Successful ✅",
-                    "Finalizing exploit... 🚀", "Final Task Successful ✅",
-                    "Signal Ok 😉",
-                    "If not open the Tab, <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff;'>Click here</a>"
-                ];
+            let index = 0;
+            
+            function typeCommand() {
+                if (index < commands.length) {
+                    document.getElementById("terminal").innerHTML += "<br>" + commands[index];
+                    document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
+                    index++;
 
-                let index = 0;
-                function typeCommand() {
-                    if (index < commands.length) {
-                        document.getElementById("terminal").innerHTML += "<br>" + commands[index];
-                        document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
-                        index++;
-                        setTimeout(typeCommand, 1500);
-                    } else {
-                        setTimeout(openPopup, 2000);
-                    }
+                    let randomDelay = Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
+                    setTimeout(typeCommand, randomDelay);
+                } else {
+                    setTimeout(finalMessage, 1500);
                 }
-                setTimeout(typeCommand, 1000);
             }
 
-            function dramaticExperience() {
-                let scamMessages = [
-                    "ERROR 404", "I NEED A GIRLFRIEND", "LOVE YOU SANA", "LOVE YOU ANANYA",
-                    "CONTACT SAMRIDHYA", "HAY PROVU", "KRISHNA JAGANNATHO PRAMANONDI", "SARASWATI"
-                ];
+            function finalMessage() {
+                // 10% chance of showing "Signal Not OK"
+                let isError = Math.random() < 0.1; 
+                let message = isError ? "Signal Not OK ❌ Retrying..." : "Signal OK 😉";
 
-                let scamCount = 0;
-                function showScamMessage() {
-                    if (scamCount < 50) {
-                        let scamText = document.createElement("div");
-                        scamText.classList.add("scam-message");
-                        scamText.innerText = scamMessages[Math.floor(Math.random() * scamMessages.length)];
-                        document.body.appendChild(scamText);
+                document.getElementById("terminal").innerHTML += "<br>" + message;
 
-                        setTimeout(() => scamText.remove(), 100);
-                        scamCount++;
-                        setTimeout(showScamMessage, 100);
-                    } else {
-                        setTimeout(playErrorVideo, 500);
-                    }
+                if (isError) {
+                    setTimeout(() => {
+                        document.getElementById("terminal").innerHTML += "<br>Retry Successful ✅";
+                        setTimeout(openPopup, 2000);
+                    }, 3000);
+                } else {
+                    setTimeout(openPopup, 2000);
                 }
-
-                function playErrorVideo() {
-                    document.getElementById("blackScreen").style.display = "block";
-                    let video = document.createElement("video");
-                    video.src = "https://github.com/Samridhya01/Zee-Bangla/raw/refs/heads/main/saveinsta.cc_1080p-super-windows-error-meme-download-in-description.mp4";
-                    video.autoplay = true;
-                    video.controls = false;
-                    video.style.position = "fixed";
-                    video.style.top = "50%";
-                    video.style.left = "50%";
-                    video.style.transform = "translate(-50%, -50%)";
-                    video.style.width = "100vw";
-                    video.style.height = "100vh";
-                    document.body.appendChild(video);
-
-                    video.onended = () => {
-                        document.getElementById("blackScreen").style.display = "none";
-                        normalExperience();
-                    };
-                }
-
-                setTimeout(showScamMessage, 100);
             }
 
             function openPopup() {
@@ -175,18 +177,18 @@
                 let y = Math.floor(Math.random() * (window.innerHeight - 500));
                 let popup = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "VideoPlayer", `width=300,height=500,top=${y},left=${x}`);
 
-                setInterval(() => {
-                    let newX = Math.floor(Math.random() * (window.innerWidth - 300));
-                    let newY = Math.floor(Math.random() * (window.innerHeight - 500));
-                    popup.moveTo(newX, newY);
-                }, 2000);
+                if (popup) {
+                    setInterval(() => {
+                        let newX = Math.floor(Math.random() * (window.innerWidth - 300));
+                        let newY = Math.floor(Math.random() * (window.innerHeight - 500));
+                        popup.moveTo(newX, newY);
+                    }, 2000);
+                } else {
+                    document.getElementById("terminal").innerHTML += `<br><span style="color:#ff00ff;">Popup Blocked! <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration: underline;">Click here</a></span>`;
+                }
             }
 
-            if (isDramatic) {
-                dramaticExperience();
-            } else {
-                normalExperience();
-            }
+            setTimeout(typeCommand, 1000);
         });
     </script>
 

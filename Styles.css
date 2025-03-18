@@ -1,0 +1,106 @@
+/* Base Styles */
+body {
+    background-color: black;
+    color: #00ff00;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    padding: 10px;
+    overflow: hidden;
+    transition: background 0.2s;
+}
+
+/* Background Animation */
+.bg-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+    animation: bgBlink 3s infinite;
+}
+
+/* Desktop Background */
+@media (min-width: 769px) {
+    .bg-animation {
+        background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif');
+    }
+}
+
+/* Mobile Background */
+@media (max-width: 768px) {
+    .bg-animation {
+        background-image: url('https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/YOJ9H.gif');
+    }
+}
+
+/* Fast Background Effect (Dramatic Mode) */
+.fast-bg {
+    animation: fastBlink 0.1s infinite;
+}
+
+/* Logo */
+.logo-container img {
+    width: 269px;
+    height: auto;
+}
+
+/* Terminal */
+#terminal {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ff00;
+    padding: 15px;
+    width: 90%;
+    max-width: 600px;
+    height: 250px;
+    overflow-y: auto;
+    white-space: pre-line;
+    font-size: 14px;
+    box-shadow: 0 0 20px #00ff00;
+    margin: auto;
+    margin-top: 15px;
+    text-align: left;
+}
+
+/* Glitch Overlay */
+.glitch-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
+    transition: opacity 0.05s;
+}
+
+/* Video Container */
+#video-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 100;
+}
+
+#hacked-video {
+    width: 100%;
+    height: 100%;
+}
+
+/* Keyframes */
+@keyframes bgBlink {
+    0%, 100% { opacity: 1; }
+    66% { opacity: 0; }
+}
+
+@keyframes fastBlink {
+    0%, 100% { background-color: black; }
+    50% { background-color: white; }
+}

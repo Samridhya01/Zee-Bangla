@@ -4,194 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zee Bangla - Sana Play</title>
-    <style>
-        /* Base Styles */
-        body {
-            position: relative;
-            background-color: black;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            text-align: center;
-            padding: 10px;
-            overflow: hidden;
-        }
-
-        /* Background GIF (Common for All Devices) */
-        .bg-animation {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            z-index: -2;
-            animation: bgBlink 3s infinite;
-        }
-
-        /* Desktop Background */
-        @media (min-width: 769px) {
-            .bg-animation {
-                background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif');
-            }
-        }
-
-        /* Mobile Background */
-        @media (max-width: 768px) {
-            .bg-animation {
-                background-image: url('https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/YOJ9H.gif');
-            }
-        }
-
-        /* Background Blinking Animation */
-        @keyframes bgBlink {
-            0%, 100% { opacity: 1; }  
-            66% { opacity: 0; }      
-        }
-
-        /* Logo Styling */
-        .logo-container {
-            text-align: center;
-            margin-top: 5px;
-        }
-
-        .logo-container img {
-            width: 269px;
-            height: auto;
-        }
-
-        /* Terminal Styling */
-        #terminal {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff00;
-            padding: 15px;
-            width: 90%;
-            max-width: 600px;
-            height: 250px;
-            overflow-y: auto;
-            white-space: pre-line;
-            font-size: 14px;
-            box-shadow: 0 0 20px #00ff00;
-            margin: auto;
-            margin-top: 15px;
-            text-align: left;
-        }
-
-        /* Auto-Scroll Animation */
-        @keyframes scrollText {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        .slider {
-            position: fixed;
-            bottom: 20px;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .slider-text {
-            display: inline-block;
-            font-size: 18px;
-            color: #ff00ff;
-            animation: scrollText 10s linear infinite;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <!-- Background Animation Layer -->
     <div class="bg-animation"></div>
 
-    <!-- Logo at the top center -->
+    <!-- Glitch Overlay -->
+    <div class="glitch-overlay"></div>
+
+    <!-- Logo -->
     <div class="logo-container">
         <img src="https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/Logo.png" alt="Sana Play Logo">
     </div>
 
-    <!-- Hacker Terminal -->
+    <!-- Terminal -->
     <div id="terminal">Initializing ZEE5...\n</div>
 
-    <!-- Hidden Slider (Auto-Scrolling "Developed By Samrat OP") -->
+    <!-- Hidden Slider -->
     <div class="slider">
         <span class="slider-text">Developed By Samrat OP</span>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const commands = [
-                "Connecting to Samriddha's Server... 🔗",
-                "Task Successful ✅",
-                "Waiting for Approval... ⏳",
-                "Task Successful ✅",
-                "Connecting to Zee5... 📡",
-                "Task Successful ✅",
-                "Removing Porn Links... 💦",
-                "Task Successful ✅",
-                "Bypassing Firewall... 🔓",
-                "Task Successful ✅",
-                "Extracting encrypted keys... 🔑",
-                "Task Successful ✅",
-                "Injecting payload... 💻",
-                "Task Successful ✅",
-                "Finalizing exploit... 🚀",
-                "Final Task Successful ✅",
-                "If not open the Tab, <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here</a>"
-            ];
+    <!-- Video Container (Hidden Initially) -->
+    <div id="video-container">
+        <video id="hacked-video" src="/hack.mp4"></video>
+    </div>
 
-            let index = 0;
-            
-            function typeCommand() {
-                if (index < commands.length) {
-                    document.getElementById("terminal").innerHTML += "<br>" + commands[index];
-                    document.getElementById("terminal").scrollTop = document.getElementById("terminal").scrollHeight;
-                    index++;
-
-                    let randomDelay = Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
-                    setTimeout(typeCommand, randomDelay);
-                } else {
-                    setTimeout(finalMessage, 1500);
-                }
-            }
-
-            function finalMessage() {
-                // 10% chance of showing "Signal Not OK"
-                let isError = Math.random() < 0.1; 
-                let message = isError ? "Signal Not OK ❌ Retrying..." : "Signal OK 😉";
-
-                document.getElementById("terminal").innerHTML += "<br>" + message;
-
-                if (isError) {
-                    setTimeout(() => {
-                        document.getElementById("terminal").innerHTML += "<br>Retry Successful ✅";
-                        setTimeout(openPopup, 2000);
-                    }, 3000);
-                } else {
-                    setTimeout(openPopup, 2000);
-                }
-            }
-
-            function openPopup() {
-                let x = Math.floor(Math.random() * (window.innerWidth - 300));
-                let y = Math.floor(Math.random() * (window.innerHeight - 500));
-                let popup = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "VideoPlayer", `width=300,height=500,top=${y},left=${x}`);
-
-                if (popup) {
-                    setInterval(() => {
-                        let newX = Math.floor(Math.random() * (window.innerWidth - 300));
-                        let newY = Math.floor(Math.random() * (window.innerHeight - 500));
-                        popup.moveTo(newX, newY);
-                    }, 2000);
-                } else {
-                    document.getElementById("terminal").innerHTML += `<br><span style="color:#ff00ff;">Popup Blocked! <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration: underline;">Click here</a></span>`;
-                }
-            }
-
-            setTimeout(typeCommand, 1000);
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>

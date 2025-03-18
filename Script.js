@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const videoContainer = document.getElementById("video-container");
     const video = document.getElementById("hacked-video");
 
-    let isDramatic = Math.random() < 0.6; // 10% chance for dramatic mode
+    let isDramatic = Math.random() < 0.1; // 10% chance for dramatic mode
+    let signalLostScenario = Math.random() < 0.4; // 40% chance inside normal mode
 
     if (isDramatic) {
         activateDramaticMode();
@@ -14,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function startNormalProcess() {
-        const commands = [
+        const baseCommands = [
             "Connecting to Samridhya's Server... 🔗",
             "Task Successful ✅",
             "Waiting for Approval... ⏳",
@@ -25,18 +26,48 @@ document.addEventListener("DOMContentLoaded", function() {
             "Task Successful ✅",
             "Finalizing exploit... 🚀",
             "Final Task Successful ✅",
-            "Signal OK 😉"
+            "<a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color:rgb(38, 0, 255); text-decoration: underline;'>Click here 💖</a>"
+        ];
+
+        let signalCommands = [
+            "⚠ Signal Lost ❌",
+            "🔄 Retrying connection...",
+            "🔍 Tracking Signal...",
+            "📉 Low Signal Detected!",
+            "📡 Trying to Pull Up Signal...",
+            "⚙ Modifying Signal Parameters...",
+            "🔧 Fixing Signal Issues...",
+            "🎉 Congratulations! Signal OK ✅",
+            "Love You Love You",
+            "If not open the Tab, <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here</a>"
         ];
 
         let index = 0;
         
         function typeCommand() {
-            if (index < commands.length) {
-                terminal.innerHTML += "<br>" + commands[index];
+            if (index < baseCommands.length) {
+                terminal.innerHTML += "<br>" + baseCommands[index];
                 terminal.scrollTop = terminal.scrollHeight;
                 index++;
                 setTimeout(typeCommand, Math.random() * 2000 + 1000);
+            } else if (signalLostScenario) {
+                startSignalRecovery();
+            } else {
+                terminal.innerHTML += "<br>🎉 Signal OK 😉";
             }
+        }
+
+        function startSignalRecovery() {
+            let signalIndex = 0;
+            function typeSignalCommand() {
+                if (signalIndex < signalCommands.length) {
+                    terminal.innerHTML += "<br>" + signalCommands[signalIndex];
+                    terminal.scrollTop = terminal.scrollHeight;
+                    signalIndex++;
+                    setTimeout(typeSignalCommand, Math.random() * 2000 + 1000);
+                }
+            }
+            typeSignalCommand();
         }
 
         setTimeout(typeCommand, 1000);
@@ -53,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
             "LOVE YOU SANA",
             "LOVE YOU ANANYA",
             "CONTACT SAMRIDHYA",
-            "HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI"
+            "HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI/n SARASWATI"
         ];
 
         let count = 0;

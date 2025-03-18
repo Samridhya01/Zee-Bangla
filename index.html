@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zee Bangla - Sana Play</title>
     <style>
-        /* Base Styles */
+        /* General Styling */
         body {
-            position: relative;
             background-color: black;
             color: #00ff00;
             font-family: 'Courier New', monospace;
             text-align: center;
-            padding: 10px;
             overflow: hidden;
+            position: relative;
         }
 
-        /* Background GIF */
+        /* Background Animation */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -25,22 +24,21 @@
             height: 100%;
             background-size: cover;
             background-position: center;
-            background-repeat: no-repeat;
             z-index: -2;
         }
 
+        /* Desktop Background */
         @media (min-width: 769px) {
-            .bg-animation { background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif'); }
+            .bg-animation {
+                background-image: url('https://media0.giphy.com/media/xsCevAab5ufj37BeGR/giphy.gif');
+            }
         }
 
+        /* Mobile Background */
         @media (max-width: 768px) {
-            .bg-animation { background-image: url('https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/YOJ9H.gif'); }
-        }
-
-        /* Logo */
-        .logo-container img {
-            width: 269px;
-            height: auto;
+            .bg-animation {
+                background-image: url('https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/YOJ9H.gif');
+            }
         }
 
         /* Terminal */
@@ -60,64 +58,43 @@
             text-align: left;
         }
 
-        /* Glitch Effect */
-        .glitch-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            opacity: 0;
-            z-index: 1000;
-        }
-
         /* Hidden Video */
-        #video-container {
+        #errorVideo {
+            width: 100vw;
+            height: 100vh;
             display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
             background: black;
-            z-index: 9999;
-        }
-
-        #hacked-video {
-            width: 100%;
-            height: 100%;
         }
     </style>
 </head>
 <body>
-
+    <!-- Background Animation -->
     <div class="bg-animation"></div>
-    <div class="glitch-overlay"></div>
 
+    <!-- Logo -->
     <div class="logo-container">
         <img src="https://raw.githubusercontent.com/Samridhya01/Zee-Bangla/refs/heads/main/Logo.png" alt="Sana Play Logo">
     </div>
 
+    <!-- Terminal -->
     <div id="terminal">Initializing ZEE5...\n</div>
 
-    <div id="video-container">
-        <video id="hacked-video" src="https://github.com/Samridhya01/Zee-Bangla/raw/refs/heads/main/saveinsta.cc_1080p-super-windows-error-meme-download-in-description.mp4"></video>
-    </div>
+    <!-- Hidden Video -->
+    <video id="errorVideo" src="https://github.com/Samridhya01/Zee-Bangla/raw/refs/heads/main/saveinsta.cc_1080p-super-windows-error-meme-download-in-description.mp4"></video>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const terminal = document.getElementById("terminal");
-            const glitchOverlay = document.querySelector(".glitch-overlay");
-            const bgAnimation = document.querySelector(".bg-animation");
-            const videoContainer = document.getElementById("video-container");
-            const video = document.getElementById("hacked-video");
-
-            let isDramatic = Math.random() < 0.1;
-            let signalLostScenario = Math.random() < 0.4;
+            const video = document.getElementById("errorVideo");
+            
+            let isDramatic = Math.random() < 0.1; // 10% chance for dramatic mode
+            let signalLostScenario = Math.random() < 0.4; // 40% chance in normal mode for "Signal Lost"
 
             if (isDramatic) {
-                activateDramaticMode();
+                startDramaticExperience();
             } else {
                 startNormalProcess();
             }
@@ -133,7 +110,7 @@
                     "Bypassing Firewall... 🔓",
                     "Task Successful ✅",
                     "Finalizing exploit... 🚀",
-                    "Final Task Successful ✅","<a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here</a>"
+                    "Final Task Successful ✅"
                 ];
 
                 let signalCommands = [
@@ -145,7 +122,7 @@
                     "⚙ Modifying Signal Parameters...",
                     "🔧 Fixing Signal Issues...",
                     "🎉 Congratulations! Signal OK ✅",
-                    "If not open the Tab, <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here</a>"
+                    `🚀 <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration:underline;">Click here 😘</a>`
                 ];
 
                 let index = 0;
@@ -159,7 +136,7 @@
                     } else if (signalLostScenario) {
                         startSignalRecovery();
                     } else {
-                        terminal.innerHTML += "<br>🎉 Signal OK 😉";
+                        openStreamTab();
                     }
                 }
 
@@ -171,63 +148,60 @@
                             terminal.scrollTop = terminal.scrollHeight;
                             signalIndex++;
                             setTimeout(typeSignalCommand, Math.random() * 2000 + 1000);
+                        } else {
+                            openStreamTab();
                         }
                     }
                     typeSignalCommand();
                 }
 
+                function openStreamTab() {
+                    let streamWindow = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "_blank");
+                    if (!streamWindow) {
+                        terminal.innerHTML += `<br>🚀 <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration:underline;">Click here 😘</a>`;
+                    }
+                }
+
                 setTimeout(typeCommand, 1000);
             }
 
-            function activateDramaticMode() {
-                console.warn("Dramatic Mode Activated!");
-
-                bgAnimation.classList.add("fast-bg");
-
+            function startDramaticExperience() {
                 let spamMessages = [
-                    "ERROR 404",
-                    "I NEED A GIRLFRIEND",
-                    "LOVE YOU SANA",
-                    "LOVE YOU ANANYA",
-                    "CONTACT SAMRIDHYA",
+                    "ERROR 404 ❌",
+                    "I NEED A GIRLFRIEND 💔",
+                    "LOVE YOU SANA 💖",
+                    "LOVE YOU ANANYA 💕",
+                    `CONTACT <a href='https://wa.link/6xj1s0' target='_blank' style='color:#ff00ff;'>SAMRIDHYA</a> 📞`,
                     "HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI"
                 ];
 
                 let count = 0;
-                function spamTerminal() {
+                function showSpam() {
                     if (count < 50) {
-                        let randomMessage = spamMessages[Math.floor(Math.random() * spamMessages.length)];
-                        if (randomMessage === "CONTACT SAMRIDHYA") {
-                            randomMessage = `<a href='https://wa.link/6xj1s0' target='_blank' style='color:#ff00ff;'>CONTACT SAMRIDHYA</a>`;
-                        }
-                        terminal.innerHTML += "<br>" + randomMessage;
+                        terminal.innerHTML += "<br>" + spamMessages[Math.floor(Math.random() * spamMessages.length)];
                         terminal.scrollTop = terminal.scrollHeight;
                         count++;
-                        setTimeout(spamTerminal, Math.random() * 200 + 100);
+                        setTimeout(showSpam, Math.random() * 200);
                     } else {
-                        startVideo();
+                        playVideo();
                     }
                 }
-                spamTerminal();
-            }
+                
+                function playVideo() {
+                    video.style.display = "block";
+                    video.play().catch(() => {
+                        document.body.addEventListener("click", () => video.play(), { once: true });
+                    });
 
-            function startVideo() {
-                let flashCount = 0;
-                function glitchEffect() {
-                    if (flashCount < 10) {
-                        glitchOverlay.style.opacity = flashCount % 2 === 0 ? "1" : "0";
-                        flashCount++;
-                        setTimeout(glitchEffect, 100);
-                    } else {
-                        videoContainer.style.display = "block";
-                        document.addEventListener("click", () => video.play());
-                        video.onended = () => { document.body.style.background = "black"; setTimeout(() => location.reload(), 3000); };
-                    }
+                    video.onended = () => {
+                        video.style.display = "none";
+                        startNormalProcess();
+                    };
                 }
-                glitchEffect();
+
+                showSpam();
             }
         });
     </script>
-
 </body>
 </html>

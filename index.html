@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zee Bangla - Sana Play</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* General Styling */
         body {
-            background-color: black;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            text-align: center;
+            background: linear-gradient(135deg, #001a00 0%, #000 100%);
+            color: #00ff9d;
+            font-family: 'Source Code Pro', monospace;
             overflow: hidden;
-            position: relative;
+            margin: 0;
+            min-height: 100vh;
+            transition: background-color 0.5s;
         }
 
         /* Background Animation */
@@ -25,6 +27,13 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
+            opacity: 0.7;
+            animation: bgToggle 2s infinite alternate;
+        }
+
+        @keyframes bgToggle {
+            0% { opacity: 0.2; }
+            100% { opacity: 0.7; }
         }
 
         /* Desktop Background */
@@ -41,80 +50,121 @@
             }
         }
 
-        /* Terminal */
-        #terminal {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff00;
-            padding: 15px;
-            width: 90%;
-            max-width: 600px;
-            height: 250px;
-            overflow-y: auto;
-            white-space: pre-line;
-            font-size: 14px;
-            box-shadow: 0 0 20px #00ff00;
-            margin: auto;
-            margin-top: 15px;
-            text-align: left;
+        /* Logo Container */
+        .logo-container {
+            padding: 2rem 0;
+            animation: float 3s ease-in-out infinite;
         }
 
-        /* Hidden Video */
-        #errorVideo {
-            width: 100vw;
-            height: 100vh;
-            display: none;
+        .logo-container img {
+            width: min(60vw, 400px);
+            filter: drop-shadow(0 0 15px #00ff8866);
+        }
+
+        /* Terminal */
+        #terminal {
+            background: rgba(0, 20, 10, 0.9);
+            border: 2px solid #00ff8866;
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 14px;
+            box-shadow: 0 0 30px #00ff8822;
+            margin: 20px auto;
+            text-align: left;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .terminal-line {
+            margin: 5px 0;
+            line-height: 1.4;
+        }
+
+        /* Flash Effect */
+        .flash {
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            animation: flashEffect 1s;
+        }
+
+        @keyframes flashEffect {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Video Container */
+        #videoContainer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             background: black;
+            z-index: 9999;
+            display: none;
         }
-        /* Marquee Styling */
-    .marquee {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px 0;
-        background: rgba(0, 255, 136, 0.1);
-        color: #00ff88;
-        white-space: nowrap;
-        overflow: hidden;
-        font-size: 14px;
-        z-index: 1000;
-        border-top: 1px solid #00ff8866;
-        box-shadow: 0 -5px 15px rgba(0, 255, 136, 0.1);
-    }
 
-    /* Marquee Animation */
-    @keyframes marquee {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-    }
+        #hackVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .marquee {
-        animation: marquee 20s linear infinite;
-    }
-
-    /* Pause on Hover */
-    .marquee:hover {
-        animation-play-state: paused;
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
+        /* Footer Text */
         .marquee {
-            font-size: 12px;
-            padding: 8px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            white-space: nowrap;
+            overflow: hidden;
+            animation: marquee 20s linear infinite;
         }
-    }
+
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Text Colors */
+        .status-loading { color: #00ff88; }
+        .status-success { color: #00ff88; text-shadow: 0 0 10px #00ff8866; }
+        .status-error { color: #ff0055; text-shadow: 0 0 10px #ff005566; }
+        .status-warning { color: #ffaa00; text-shadow: 0 0 10px #ffaa0066; }
+        .status-link { color: #ff00ff; text-decoration: none; transition: all 0.3s ease; }
+        .status-link:hover { text-shadow: 0 0 15px #ff00ff; transform: scale(1.05); }
     </style>
 </head>
 <body>
-    <div class="marquee">
-    � Hack by Samrat | ❤️ Made with Love | 👨‍💻 Developed By Samriddho | 🔥 Powered by Zee5 | 🌟 Special Thanks: Sana & Ananya
-</div>
     <!-- Background Animation -->
     <div class="bg-animation"></div>
+
+    <!-- Flash Effect -->
+    <div class="flash" id="flash"></div>
+
+    <!-- Video Container -->
+    <div id="videoContainer">
+        <video id="hackVideo" controls>
+            <source src="https://github.com/Samridhya01/Zee-Bangla/raw/refs/heads/main/hack.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <!-- Logo -->
     <div class="logo-container">
@@ -122,126 +172,121 @@
     </div>
 
     <!-- Terminal -->
-    <div id="terminal">Initializing ZEE5...\n</div>
+    <div id="terminal">
+        <div class="terminal-line status-loading">🚀 Initializing ZEE5...</div>
+    </div>
 
-    <!-- Hidden Video -->
-    <video id="errorVideo" src="https://github.com/Samridhya01/Zee-Bangla/raw/refs/heads/main/hack.mp4"></video>
+    <!-- Footer Text -->
+    <div class="marquee">
+        🚩 Hack by Samrat | 💖 Made with Love | 👨💻 Developed By Samriddho | 🔥 Powered by Zee5 | 🌟 Special Thanks: Sana & Ananya
+    </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const terminal = document.getElementById("terminal");
-            const video = document.getElementById("errorVideo");
-            
-            let isDramatic = Math.random() < 0.3; // 10% chance for dramatic mode
-            let signalLostScenario = Math.random() < 0.4; // 40% chance in normal mode for "Signal Lost"
+        document.addEventListener("DOMContentLoaded", function () {
+            const terminal = document.getElementById('terminal');
+            const flash = document.getElementById('flash');
+            const videoContainer = document.getElementById('videoContainer');
+            const hackVideo = document.getElementById('hackVideo');
 
+            // Function to add lines to the terminal
+            function addTerminalLine(text, type = 'loading') {
+                const line = document.createElement('div');
+                line.className = `terminal-line status-${type}`;
+                line.innerHTML = text;
+                terminal.appendChild(line);
+                terminal.scrollTop = terminal.scrollHeight;
+            }
+
+            // Function to simulate typing with delay
+            function typeWriter(text, type, delay = 1000) {
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        addTerminalLine(text, type);
+                        resolve();
+                    }, delay);
+                });
+            }
+
+            // Function to trigger flash effect
+            function triggerFlash() {
+                return new Promise(resolve => {
+                    flash.style.display = 'block';
+                    flash.style.animation = 'flashEffect 1s';
+                    setTimeout(() => {
+                        flash.style.display = 'none';
+                        resolve();
+                    }, 1000);
+                });
+            }
+
+            // Normal Process
+            async function startNormalProcess() {
+                const commands = [
+                    { text: "🔗 Connecting to Samridhya's Server...", type: "loading", delay: 1500 },
+                    { text: "✅ Connection Established!", type: "success", delay: 2000 },
+                    { text: "🔒 Accessing Secure Channels...", type: "loading", delay: 1800 },
+                    { text: "✅ Security Bypassed!", type: "success", delay: 1500 },
+                    { text: "📡 Connecting to Zee5 Servers...", type: "loading", delay: 2000 },
+                    { text: "✅ Server Connection Successful!", type: "success", delay: 1500 },
+                    { text: "🔓 Bypassing Firewall...", type: "warning", delay: 2500 },
+                    { text: "✅ Firewall Breached!", type: "success", delay: 1500 },
+                    { text: "🚀 Finalizing Exploit...", type: "loading", delay: 2000 },
+                    { text: "🎉 Exploit Successful!", type: "success", delay: 1000 },
+                    { text: "💖 <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' class='status-link'>Click here to Access Zee Bangla 🥲</a>", type: "link", delay: 0 }
+                ];
+
+                for (const cmd of commands) {
+                    await typeWriter(cmd.text, cmd.type, cmd.delay);
+                }
+
+                // Trigger flash effect before redirecting
+                await triggerFlash();
+
+                // Redirect to Zee Bangla link
+                window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
+            }
+
+            // Dramatic Mode
+            async function startDramaticExperience() {
+                const dramaticMessages = [
+                    { text: "💥 SYSTEM FAILURE DETECTED!", type: "error", delay: 500 },
+                    { text: "🚨 CRITICAL ERROR 404 ❌", type: "error", delay: 500 },
+                    { text: "💔 I NEED A GIRLFRIEND", type: "error", delay: 500 },
+                    { text: "💌 LOVE YOU SANA", type: "warning", delay: 500 },
+                    { text: "🌸 LOVE YOU ANANYA", type: "warning", delay: 500 },
+                    { text: `📞 CONTACT <a href='https://wa.link/6xj1s0' target='_blank' class='status-link'>SAMRIDHYA</a>`, type: "link", delay: 500 },
+                    { text: "🌀 HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI", type: "error", delay: 500 },
+                    { text: "⚠️ UNAUTHORIZED ACCESS DETECTED", type: "error", delay: 500 },
+                    { text: "🔥 SYSTEM OVERHEATING", type: "error", delay: 500 },
+                    { text: "💾 MEMORY CORRUPTION", type: "error", delay: 500 }
+                ];
+
+                for (let i = 0; i < 20; i++) {
+                    const msg = dramaticMessages[Math.floor(Math.random() * dramaticMessages.length)];
+                    await typeWriter(msg.text, msg.type, msg.delay);
+                }
+
+                // Trigger flash effect
+                await triggerFlash();
+
+                // Show and play video
+                videoContainer.style.display = 'block';
+                hackVideo.play();
+
+                // When video ends, trigger flash and redirect
+                hackVideo.onended = async () => {
+                    videoContainer.style.display = 'none';
+                    await triggerFlash();
+                    window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
+                };
+            }
+
+            // Start the process
+            const isDramatic = Math.random() < 0.1; // 10% chance for dramatic mode
             if (isDramatic) {
                 startDramaticExperience();
             } else {
                 startNormalProcess();
-            }
-
-            function startNormalProcess() {
-                const baseCommands = [
-                    "Connecting to Samridhya's Server... 🔗",
-                    "Task Successful ✅",
-                    "Waiting for Approval... ⏳",
-                    "Task Successful ✅",
-                    "Connecting to Zee5... 📡",
-                    "Task Successful ✅",
-                    "Bypassing Firewall... 🔓",
-                    "Task Successful ✅",
-                    "Finalizing exploit... 🚀",
-                    "Final Task Successful ✅","<a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here 🥲</a>"
-                ];
-
-                let signalCommands = ["WAIT","WAIT",
-                    "⚠ Signal Lost ❌",
-                    "🔄 Retrying connection...",
-                    "🔍 Tracking Signal...",
-                    "📉 Low Signal Detected!",
-                    "📡 Trying to Pull Up Signal...",
-                    "⚙ Modifying Signal Parameters...",
-                    "🔧 Fixing Signal Issues...",
-                    "🎉 Congratulations! Signal OK ✅",
-                    `🚀 <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration:underline;">Click here 😘</a>`
-                ];
-
-                let index = 0;
-                
-                function typeCommand() {
-                    if (index < baseCommands.length) {
-                        terminal.innerHTML += "<br>" + baseCommands[index];
-                        terminal.scrollTop = terminal.scrollHeight;
-                        index++;
-                        setTimeout(typeCommand, Math.random() * 2000 + 1000);
-                    } else if (signalLostScenario) {
-                        startSignalRecovery();
-                    } else {
-                        openStreamTab();
-                    }
-                }
-
-                function startSignalRecovery() {
-                    let signalIndex = 0;
-                    function typeSignalCommand() {
-                        if (signalIndex < signalCommands.length) {
-                            terminal.innerHTML += "<br>" + signalCommands[signalIndex];
-                            terminal.scrollTop = terminal.scrollHeight;
-                            signalIndex++;
-                            setTimeout(typeSignalCommand, Math.random() * 2000 + 1000);
-                        } else {
-                            openStreamTab();
-                        }
-                    }
-                    typeSignalCommand();
-                }
-
-                function openStreamTab() {
-                    let streamWindow = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "_blank");
-                    if (!streamWindow) {
-                        terminal.innerHTML += `<br>🚀 <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration:underline;">Click here 😘</a>`;
-                    }
-                }
-
-                setTimeout(typeCommand, 1000);
-            }
-
-            function startDramaticExperience() {
-                let spamMessages = [
-                    "ERROR 404 ❌",
-                    "I NEED A GIRLFRIEND 💔",
-                    "LOVE YOU SANA 💖",
-                    "LOVE YOU ANANYA 💕",
-                    `CONTACT <a href='https://wa.link/6xj1s0' target='_blank' style='color:#ff00ff;'>SAMRIDHYA</a> 📞`,
-                    "HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI"
-                ];
-
-                let count = 0;
-                function showSpam() {
-                    if (count < 50) {
-                        terminal.innerHTML += "<br>" + spamMessages[Math.floor(Math.random() * spamMessages.length)];
-                        terminal.scrollTop = terminal.scrollHeight;
-                        count++;
-                        setTimeout(showSpam, Math.random() * 200);
-                    } else {
-                        playVideo();
-                    }
-                }
-                
-                function playVideo() {
-                    video.style.display = "block";
-                    video.play().catch(() => {
-                        document.body.addEventListener("click", () => video.play(), { once: true });
-                    });
-
-                    video.onended = () => {
-                        video.style.display = "none";
-                        startNormalProcess();
-                    };
-                }
-
-                showSpam();
             }
         });
     </script>

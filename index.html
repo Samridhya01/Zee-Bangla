@@ -68,9 +68,51 @@
             left: 0;
             background: black;
         }
+        /* Marquee Styling */
+    .marquee {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
+        background: rgba(0, 255, 136, 0.1);
+        color: #00ff88;
+        white-space: nowrap;
+        overflow: hidden;
+        font-size: 14px;
+        z-index: 1000;
+        border-top: 1px solid #00ff8866;
+        box-shadow: 0 -5px 15px rgba(0, 255, 136, 0.1);
+    }
+
+    /* Marquee Animation */
+    @keyframes marquee {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+    }
+
+    .marquee {
+        animation: marquee 20s linear infinite;
+    }
+
+    /* Pause on Hover */
+    .marquee:hover {
+        animation-play-state: paused;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .marquee {
+            font-size: 12px;
+            padding: 8px 0;
+        }
+    }
     </style>
 </head>
 <body>
+    <div class="marquee">
+    � Hack by Samrat | ❤️ Made with Love | 👨‍💻 Developed By Samriddho | 🔥 Powered by Zee5 | 🌟 Special Thanks: Sana & Ananya
+</div>
     <!-- Background Animation -->
     <div class="bg-animation"></div>
 

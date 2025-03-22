@@ -25,7 +25,6 @@
             background-size: cover;
             background-position: center;
             z-index: -2;
-            transition: opacity 1s;
         }
 
         /* Desktop Background */
@@ -69,35 +68,6 @@
             left: 0;
             background: black;
         }
-
-        /* Logo Styling */
-        .logo-container img {
-            width: 150px;
-            margin-top: 10px;
-        }
-
-        /* Moving Text */
-        .marquee {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            font-size: 16px;
-            color: #ff00ff;
-            animation: moveText 10s linear infinite;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 5px 0;
-        }
-
-        @keyframes moveText {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
     </style>
 </head>
 <body>
@@ -110,50 +80,127 @@
     </div>
 
     <!-- Terminal -->
-    <div id="terminal">Initializing ZEE5...<br></div>
+    <div id="terminal">Initializing ZEE5...\n</div>
 
     <!-- Hidden Video -->
     <video id="errorVideo" src="https://github.com/Samridhya01/Zee-Bangla/raw/refs/heads/main/saveinsta.cc_1080p-super-windows-error-meme-download-in-description.mp4"></video>
 
-    <!-- Moving Text -->
-    <div class="marquee">Hack by Samrat Xd | Made for Shayari | Developed by Samridhya</div>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const background = document.querySelector(".bg-animation");
             const terminal = document.getElementById("terminal");
-            let bgVisible = true;
-
-            function toggleBackground() {
-                bgVisible = !bgVisible;
-                background.style.opacity = bgVisible ? "1" : "0";
-            }
-
-            setInterval(toggleBackground, 2000); // Auto toggle every 2 seconds
-
-            const commands = [
-                "Connecting to Samridhya's Server... 🔗",
-                "Task Successful ✅",
-                "Waiting for Approval... ⏳",
-                "Task Successful ✅",
-                "Connecting to Zee5... 📡",
-                "Task Successful ✅",
-                "Bypassing Firewall... 🔓",
-                "Task Successful ✅",
-                "Finalizing exploit... 🚀",
-                "Final Task Successful ✅"
-            ];
+            const video = document.getElementById("errorVideo");
             
-            let index = 0;
-            function typeCommand() {
-                if (index < commands.length) {
-                    terminal.innerHTML += "<br>" + commands[index];
-                    terminal.scrollTop = terminal.scrollHeight;
-                    index++;
-                    setTimeout(typeCommand, 1500);
-                }
+            let isDramatic = Math.random() < 0.1; // 10% chance for dramatic mode
+            let signalLostScenario = Math.random() < 0.4; // 40% chance in normal mode for "Signal Lost"
+
+            if (isDramatic) {
+                startDramaticExperience();
+            } else {
+                startNormalProcess();
             }
-            setTimeout(typeCommand, 1000);
+
+            function startNormalProcess() {
+                const baseCommands = [
+                    "Connecting to Samridhya's Server... 🔗",
+                    "Task Successful ✅",
+                    "Waiting for Approval... ⏳",
+                    "Task Successful ✅",
+                    "Connecting to Zee5... 📡",
+                    "Task Successful ✅",
+                    "Bypassing Firewall... 🔓",
+                    "Task Successful ✅",
+                    "Finalizing exploit... 🚀",
+                    "Final Task Successful ✅","<a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' style='color: #ff00ff; text-decoration: underline;'>Click here 🥲</a>"
+                ];
+
+                let signalCommands = ["WAIT","WAIT",
+                    "⚠ Signal Lost ❌",
+                    "🔄 Retrying connection...",
+                    "🔍 Tracking Signal...",
+                    "📉 Low Signal Detected!",
+                    "📡 Trying to Pull Up Signal...",
+                    "⚙ Modifying Signal Parameters...",
+                    "🔧 Fixing Signal Issues...",
+                    "🎉 Congratulations! Signal OK ✅",
+                    `🚀 <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration:underline;">Click here 😘</a>`
+                ];
+
+                let index = 0;
+                
+                function typeCommand() {
+                    if (index < baseCommands.length) {
+                        terminal.innerHTML += "<br>" + baseCommands[index];
+                        terminal.scrollTop = terminal.scrollHeight;
+                        index++;
+                        setTimeout(typeCommand, Math.random() * 2000 + 1000);
+                    } else if (signalLostScenario) {
+                        startSignalRecovery();
+                    } else {
+                        openStreamTab();
+                    }
+                }
+
+                function startSignalRecovery() {
+                    let signalIndex = 0;
+                    function typeSignalCommand() {
+                        if (signalIndex < signalCommands.length) {
+                            terminal.innerHTML += "<br>" + signalCommands[signalIndex];
+                            terminal.scrollTop = terminal.scrollHeight;
+                            signalIndex++;
+                            setTimeout(typeSignalCommand, Math.random() * 2000 + 1000);
+                        } else {
+                            openStreamTab();
+                        }
+                    }
+                    typeSignalCommand();
+                }
+
+                function openStreamTab() {
+                    let streamWindow = window.open("http://cdn.stmify.com/embed-free.php?id=Zee_Bangla", "_blank");
+                    if (!streamWindow) {
+                        terminal.innerHTML += `<br>🚀 <a href="http://cdn.stmify.com/embed-free.php?id=Zee_Bangla" target="_blank" style="color:#ff00ff; text-decoration:underline;">Click here 😘</a>`;
+                    }
+                }
+
+                setTimeout(typeCommand, 1000);
+            }
+
+            function startDramaticExperience() {
+                let spamMessages = [
+                    "ERROR 404 ❌",
+                    "I NEED A GIRLFRIEND 💔",
+                    "LOVE YOU SANA 💖",
+                    "LOVE YOU ANANYA 💕",
+                    `CONTACT <a href='https://wa.link/6xj1s0' target='_blank' style='color:#ff00ff;'>SAMRIDHYA</a> 📞`,
+                    "HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI"
+                ];
+
+                let count = 0;
+                function showSpam() {
+                    if (count < 50) {
+                        terminal.innerHTML += "<br>" + spamMessages[Math.floor(Math.random() * spamMessages.length)];
+                        terminal.scrollTop = terminal.scrollHeight;
+                        count++;
+                        setTimeout(showSpam, Math.random() * 200);
+                    } else {
+                        playVideo();
+                    }
+                }
+                
+                function playVideo() {
+                    video.style.display = "block";
+                    video.play().catch(() => {
+                        document.body.addEventListener("click", () => video.play(), { once: true });
+                    });
+
+                    video.onended = () => {
+                        video.style.display = "none";
+                        startNormalProcess();
+                    };
+                }
+
+                showSpam();
+            }
         });
     </script>
 </body>

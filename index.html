@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zee Bangla - Sana Play</title>
+    <title>Live IPL - Sana Play</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* General Styling */
@@ -149,6 +149,59 @@
         .status-warning { color: #ffaa00; text-shadow: 0 0 10px #ffaa0066; }
         .status-link { color: #ff00ff; text-decoration: none; transition: all 0.3s ease; }
         .status-link:hover { text-shadow: 0 0 15px #ff00ff; transform: scale(1.05); }
+
+        /* Dialog Box Styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dialog-box {
+            background: rgba(0,20,10,0.95);
+            border: 2px solid #00ff88;
+            border-radius: 8px;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 0 30px #00ff8866;
+        }
+
+        .dialog-title {
+            color: #00ff88;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .dialog-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .dialog-btn {
+            background: rgba(0,255,136,0.2);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dialog-btn:hover {
+            background: rgba(0,255,136,0.4);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -173,12 +226,23 @@
 
     <!-- Terminal -->
     <div id="terminal">
-        <div class="terminal-line status-loading">🚀 Initializing ZEE5...</div>
+        <div class="terminal-line status-loading">🚀 Initializing Live TV....</div>
     </div>
 
     <!-- Footer Text -->
     <div class="marquee">
         🚩 Hack by Samrat | 💖 Made with Love | 👨💻 Developed By Samriddho | 🔥 Powered by Zee5 | 🌟 Special Thanks: Sana & Ananya
+    </div>
+
+    <!-- Channel Selection Dialog -->
+    <div class="dialog-overlay" id="dialogOverlay">
+        <div class="dialog-box">
+            <div class="dialog-title">SELECT YOUR CHANNEL</div>
+            <div class="dialog-buttons">
+                <button class="dialog-btn" id="zeeBtn">Zee Bangla</button>
+                <button class="dialog-btn" id="starBtn">Star Sports</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -187,6 +251,9 @@
             const flash = document.getElementById('flash');
             const videoContainer = document.getElementById('videoContainer');
             const hackVideo = document.getElementById('hackVideo');
+            const dialogOverlay = document.getElementById('dialogOverlay');
+            const zeeBtn = document.getElementById('zeeBtn');
+            const starBtn = document.getElementById('starBtn');
 
             // Function to add lines to the terminal
             function addTerminalLine(text, type = 'loading') {
@@ -219,6 +286,35 @@
                 });
             }
 
+            // Function to show channel selection dialog
+            function showChannelDialog() {
+                return new Promise(resolve => {
+                    dialogOverlay.style.display = 'flex';
+                    
+                    zeeBtn.onclick = () => {
+                        dialogOverlay.style.display = 'none';
+                        resolve('zee');
+                    };
+                    
+                    starBtn.onclick = () => {
+                        dialogOverlay.style.display = 'none';
+                        resolve('star');
+                    };
+                });
+            }
+
+            // Function to redirect to selected channel
+            async function redirectToChannel() {
+                const channel = await showChannelDialog();
+                await triggerFlash();
+                
+                if (channel === 'zee') {
+                    window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
+                } else {
+                    window.location.href = "http://waptv.wapka.fun/?starhindi";
+                }
+            }
+
             // Normal Process
             async function startNormalProcess() {
                 const commands = [
@@ -226,24 +322,20 @@
                     { text: "✅ Connection Established!", type: "success", delay: 2000 },
                     { text: "🔒 Accessing Secure Channels...", type: "loading", delay: 1800 },
                     { text: "✅ Security Bypassed!", type: "success", delay: 1500 },
-                    { text: "📡 Connecting to Zee5 Servers...", type: "loading", delay: 2000 },
+                    { text: "📡 Connecting to TV Servers...", type: "loading", delay: 2000 },
                     { text: "✅ Server Connection Successful!", type: "success", delay: 1500 },
                     { text: "🔓 Bypassing Firewall...", type: "warning", delay: 2500 },
                     { text: "✅ Firewall Breached!", type: "success", delay: 1500 },
                     { text: "🚀 Finalizing Exploit...", type: "loading", delay: 2000 },
-                    { text: "🎉 Exploit Successful!", type: "success", delay: 1000 },
-                    { text: "💖 <a href='http://cdn.stmify.com/embed-free.php?id=Zee_Bangla' target='_blank' class='status-link'>Click here to Access Zee Bangla 🥲</a>", type: "link", delay: 0 }
+                    { text: "🎉 Exploit Successful!", type: "success", delay: 1000 }
                 ];
 
                 for (const cmd of commands) {
                     await typeWriter(cmd.text, cmd.type, cmd.delay);
                 }
 
-                // Trigger flash effect before redirecting
-                await triggerFlash();
-
-                // Redirect to Zee Bangla link
-                window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
+                // Show channel selection and redirect
+                await redirectToChannel();
             }
 
             // Dramatic Mode
@@ -252,8 +344,8 @@
                     { text: "💥 SYSTEM FAILURE DETECTED!", type: "error", delay: 500 },
                     { text: "🚨 CRITICAL ERROR 404 ❌", type: "error", delay: 500 },
                     { text: "💔 I NEED A GIRLFRIEND", type: "error", delay: 500 },
-                    { text: "💌 LOVE YOU SANA", type: "warning", delay: 500 },
-                    { text: "🌸 LOVE YOU ANANYA", type: "warning", delay: 500 },
+                    { text: "💌 LOVE YOU ", type: "warning", delay: 500 },
+                    { text: "🌸 LOVE YOU 😘", type: "warning", delay: 500 },
                     { text: `📞 CONTACT <a href='https://wa.link/6xj1s0' target='_blank' class='status-link'>SAMRIDHYA</a>`, type: "link", delay: 500 },
                     { text: "🌀 HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI", type: "error", delay: 500 },
                     { text: "⚠️ UNAUTHORIZED ACCESS DETECTED", type: "error", delay: 500 },
@@ -273,11 +365,10 @@
                 videoContainer.style.display = 'block';
                 hackVideo.play();
 
-                // When video ends, trigger flash and redirect
+                // When video ends, show channel selection
                 hackVideo.onended = async () => {
                     videoContainer.style.display = 'none';
-                    await triggerFlash();
-                    window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
+                    await redirectToChannel();
                 };
             }
 

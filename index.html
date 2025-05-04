@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live IPL - Sana Play</title>
+    <title>Zee Bangla - Sana Play</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* General Styling */
@@ -202,6 +202,19 @@
             background: rgba(0,255,136,0.4);
             transform: scale(1.05);
         }
+
+        .dialog-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .coming-soon {
+            color: #ffaa00;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -226,7 +239,7 @@
 
     <!-- Terminal -->
     <div id="terminal">
-        <div class="terminal-line status-loading">🚀 Initializing Live TV....</div>
+        <div class="terminal-line status-loading">🚀 Initializing ZEE5...</div>
     </div>
 
     <!-- Footer Text -->
@@ -245,6 +258,19 @@
         </div>
     </div>
 
+    <!-- Star Sports Language Selection Dialog -->
+    <div class="dialog-overlay" id="starDialogOverlay">
+        <div class="dialog-box">
+            <div class="dialog-title">SELECT STAR SPORTS LANGUAGE</div>
+            <div class="dialog-buttons" style="flex-direction: column; gap: 10px;">
+                <button class="dialog-btn" id="starEnglishBtn">English</button>
+                <button class="dialog-btn" id="starHindiBtn">Hindi</button>
+                <button class="dialog-btn" id="starBengaliBtn" disabled>Bengali</button>
+                <div class="coming-soon">(Coming Soon)</div>
+            </div>
+        </div>
+    </div>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const terminal = document.getElementById('terminal');
@@ -254,6 +280,10 @@
             const dialogOverlay = document.getElementById('dialogOverlay');
             const zeeBtn = document.getElementById('zeeBtn');
             const starBtn = document.getElementById('starBtn');
+            const starDialogOverlay = document.getElementById('starDialogOverlay');
+            const starEnglishBtn = document.getElementById('starEnglishBtn');
+            const starHindiBtn = document.getElementById('starHindiBtn');
+            const starBengaliBtn = document.getElementById('starBengaliBtn');
 
             // Function to add lines to the terminal
             function addTerminalLine(text, type = 'loading') {
@@ -303,15 +333,45 @@
                 });
             }
 
+            // Function to show Star Sports language selection dialog
+            function showStarSportsDialog() {
+                return new Promise(resolve => {
+                    starDialogOverlay.style.display = 'flex';
+                    
+                    starEnglishBtn.onclick = () => {
+                        starDialogOverlay.style.display = 'none';
+                        resolve('english');
+                    };
+                    
+                    starHindiBtn.onclick = () => {
+                        starDialogOverlay.style.display = 'none';
+                        resolve('hindi');
+                    };
+                    
+                    starBengaliBtn.onclick = () => {
+                        starDialogOverlay.style.display = 'none';
+                        resolve('bengali');
+                    };
+                });
+            }
+
             // Function to redirect to selected channel
             async function redirectToChannel() {
                 const channel = await showChannelDialog();
-                await triggerFlash();
                 
                 if (channel === 'zee') {
+                    await triggerFlash();
                     window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
                 } else {
-                    window.location.href = "http://waptv.wapka.fun/?starhindi";
+                    const language = await showStarSportsDialog();
+                    await triggerFlash();
+                    
+                    if (language === 'english') {
+                        window.location.href = "https://userrr4591.ifrem.net/iframe/frame.php";
+                    } else if (language === 'hindi') {
+                        window.location.href = "http://waptv.wapka.fun/?starhindi";
+                    }
+                    // Bengali is coming soon, so no redirect yet
                 }
             }
 
@@ -322,7 +382,7 @@
                     { text: "✅ Connection Established!", type: "success", delay: 2000 },
                     { text: "🔒 Accessing Secure Channels...", type: "loading", delay: 1800 },
                     { text: "✅ Security Bypassed!", type: "success", delay: 1500 },
-                    { text: "📡 Connecting to TV Servers...", type: "loading", delay: 2000 },
+                    { text: "📡 Connecting to Zee5 Servers...", type: "loading", delay: 2000 },
                     { text: "✅ Server Connection Successful!", type: "success", delay: 1500 },
                     { text: "🔓 Bypassing Firewall...", type: "warning", delay: 2500 },
                     { text: "✅ Firewall Breached!", type: "success", delay: 1500 },
@@ -344,8 +404,8 @@
                     { text: "💥 SYSTEM FAILURE DETECTED!", type: "error", delay: 500 },
                     { text: "🚨 CRITICAL ERROR 404 ❌", type: "error", delay: 500 },
                     { text: "💔 I NEED A GIRLFRIEND", type: "error", delay: 500 },
-                    { text: "💌 LOVE YOU ", type: "warning", delay: 500 },
-                    { text: "🌸 LOVE YOU 😘", type: "warning", delay: 500 },
+                    { text: "💌 LOVE YOU SANA", type: "warning", delay: 500 },
+                    { text: "🌸 LOVE YOU ANANYA", type: "warning", delay: 500 },
                     { text: `📞 CONTACT <a href='https://wa.link/6xj1s0' target='_blank' class='status-link'>SAMRIDHYA</a>`, type: "link", delay: 500 },
                     { text: "🌀 HAY PROVU AND NAXT MASSAGE KRISHNA JAGANNATHO PRAMANONDI NEXT SARASWATI", type: "error", delay: 500 },
                     { text: "⚠️ UNAUTHORIZED ACCESS DETECTED", type: "error", delay: 500 },

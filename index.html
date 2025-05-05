@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zee Bangla - Sana Play</title>
+    <title>Live-IPL 2025 - Sana Play</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* General Styling */
@@ -186,6 +186,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .dialog-btn {
@@ -196,6 +197,7 @@
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
+            min-width: 120px;
         }
 
         .dialog-btn:hover {
@@ -214,7 +216,13 @@
             font-size: 0.9rem;
             margin-top: 5px;
             opacity: 0.8;
+            width: 100%;
         }
+        .marquee a {
+  color: #fff;
+  text-decoration: underline;
+}
+
     </style>
 </head>
 <body>
@@ -239,13 +247,18 @@
 
     <!-- Terminal -->
     <div id="terminal">
-        <div class="terminal-line status-loading">🚀 Initializing ZEE5...</div>
+        <div class="terminal-line status-loading">🚀 Initializing TV...</div>
     </div>
 
     <!-- Footer Text -->
     <div class="marquee">
-        🚩 Hack by Samrat | 💖 Made with Love | 👨💻 Developed By Samriddho | 🔥 Powered by Zee5 | 🌟 Special Thanks: Sana & Ananya
-    </div>
+  🚩 Hack by <a href="https://instagram.com/xd_samrat" target="_blank" style="color: #fff; text-decoration: underline;">Samrat</a> | 
+  💖 Made with Love | 
+  👨💻 Developed By <a href="https://instagram.com/santrasamridhya" target="_blank" style="color: #fff; text-decoration: underline;">Samriddho</a> | 
+  🔥 Powered by <a href="https://github.com/samridhya01" target="_blank" style="color: #fff; text-decoration: underline;">GitHUB</a> | 
+  🌟 Special Thanks: <a href="https://png.pngtree.com/png-clipart/20230311/original/pngtree-i-love-you-heart-outline-sticker-transparent-typography-with-silhouette-couple-png-image_8984113.png" target="_blank" style="color: #fff; text-decoration: underline;">Sana</a>
+</div>
+
 
     <!-- Channel Selection Dialog -->
     <div class="dialog-overlay" id="dialogOverlay">
@@ -254,6 +267,7 @@
             <div class="dialog-buttons">
                 <button class="dialog-btn" id="zeeBtn">Zee Bangla</button>
                 <button class="dialog-btn" id="starBtn">Star Sports</button>
+                <button class="dialog-btn" id="jalshaBtn">Star Jalsha NEW</button>
             </div>
         </div>
     </div>
@@ -280,6 +294,7 @@
             const dialogOverlay = document.getElementById('dialogOverlay');
             const zeeBtn = document.getElementById('zeeBtn');
             const starBtn = document.getElementById('starBtn');
+            const jalshaBtn = document.getElementById('jalshaBtn');
             const starDialogOverlay = document.getElementById('starDialogOverlay');
             const starEnglishBtn = document.getElementById('starEnglishBtn');
             const starHindiBtn = document.getElementById('starHindiBtn');
@@ -330,6 +345,11 @@
                         dialogOverlay.style.display = 'none';
                         resolve('star');
                     };
+                    
+                    jalshaBtn.onclick = () => {
+                        dialogOverlay.style.display = 'none';
+                        resolve('jalsha');
+                    };
                 });
             }
 
@@ -362,7 +382,8 @@
                 if (channel === 'zee') {
                     await triggerFlash();
                     window.location.href = "http://cdn.stmify.com/embed-free.php?id=Zee_Bangla";
-                } else {
+                } 
+                else if (channel === 'star') {
                     const language = await showStarSportsDialog();
                     await triggerFlash();
                     
@@ -373,6 +394,10 @@
                     }
                     // Bengali is coming soon, so no redirect yet
                 }
+                else if (channel === 'jalsha') {
+                    await triggerFlash();
+                    window.location.href = "https://livetv.com.bd/tv/kolkata/start-jalsha.php";
+                }
             }
 
             // Normal Process
@@ -382,7 +407,7 @@
                     { text: "✅ Connection Established!", type: "success", delay: 2000 },
                     { text: "🔒 Accessing Secure Channels...", type: "loading", delay: 1800 },
                     { text: "✅ Security Bypassed!", type: "success", delay: 1500 },
-                    { text: "📡 Connecting to Zee5 Servers...", type: "loading", delay: 2000 },
+                    { text: "📡 Connecting to Local TV Servers...", type: "loading", delay: 2000 },
                     { text: "✅ Server Connection Successful!", type: "success", delay: 1500 },
                     { text: "🔓 Bypassing Firewall...", type: "warning", delay: 2500 },
                     { text: "✅ Firewall Breached!", type: "success", delay: 1500 },
